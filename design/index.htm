@@ -19,7 +19,7 @@
 		<link rel="icon" href="/favicon.ico" type="imge/x-icon"/>
 		<link rel="stylesheet" type="text/css" href="">
 -->
-		<title>NICE UI Dev Tet - To do List	</title>
+		<title>NICE UI Dev Test - To do List	</title>
 		<meta name="description" content="NICE UI Dev Tet - To do List - Christian Bodart's attempt"/>
 		 <link rel="stylesheet" type="text/css" href="design.css"/>
 		 <style>
@@ -36,6 +36,39 @@
 		 </style>
 	</head>
 	<body>
-
+		<form class="todo-list">
+      <legend>My todos</legend>
+      <fieldset title="Add new todos here" class="todos-add-new">
+        <input type="text" name="todo-new" placeholder="New todo&hellip;" title="Enter your new todo here" />
+      </fieldset>
+      <fieldset class="todos-current-list">
+        <legend>Your current todo list</legend>
+        <ul class="todos">
+          <!-- state classnames are generic - need to check  NHS/Nice best practices -->
+          <li id="todo-1" class="todo removed" title="This todo has been removed" />
+            <input type="checkbox" value="todo-1" />
+            <input class="todo-text" type="text" value="Task removed example"  />
+            <!-- arguably this shouldn't be here BUT user ought to be able to delete as well as remove - also consistency is nice-->
+            <input type="submit" value="delete todo 1" />
+          </li>
+          <li id="todo-2" class="todo incomplete">
+            <input type="checkbox" value="todo-2" />
+            <input class="todo-text" type="text" value="Task not completed example" />
+            <input type="submit" value="remove todo 2" />
+          </li>
+          <li id="todo-3" class="todo incomplete active">
+            <input type="checkbox" value="todo-3" />
+            <input class="todo-text" type="text" value="Task not completed active" />
+            <input type="submit" value="remove todo 3" />
+          </li>
+          <li id="todo-4" class="todo complete">
+            <input class="todo-text" type="checkbox" value="todo-4" disabled="disabled"/>
+            <input type="text" value="Task completed example" />
+            <!-- again user ought to be able to remove completed todos... -->
+            <input type="submit" value="delete todo 4" />
+          </li>
+        </ul>
+      </fieldset>
+    </form>
 	</body>
 </html>
