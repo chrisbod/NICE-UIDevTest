@@ -24,12 +24,11 @@
 		 <link rel="stylesheet" type="text/css" href="design.css"/>
 		 <style>
 		 /*template*/
-		 html {
+		 .test {
 		 	background-image: url(design.jpg);
 		 	background-repeat: no-repeat;
 		 	margin: 0;
 		 	padding: 39px 126px; 
-
 		 }
 		 body {
 		 	margin: 0;
@@ -37,43 +36,59 @@
 		 	width: 638px;
 		 	height: 480px;
 		 }
-		 * {outline: 1px dotted silver; background-color: transparent}
 		 </style>
 	</head>
 	<body>
+<h1>Template</h1>
+<h2>This page has no javascript but would work with server side scripting (not tested)</h2>
+<p>Notes:
+	<ul>
+		<li>The todo descriptions are input fields and thus do not require doubleclicks to edit</li>
+		<li>The placeholder on the new todo input field is not supported by IE9 or less</li>
+		<li>Currently the todos are submitted when enter (or equivalent) is hit in text field</li>
+		<li>Should be okay in IE (functionally but not stylistically yet)</li>
+		<li>Classes are arguably over used but this way it allows for more markup flexibility</li>
+		<li>The active node is there only for styling as it is triggered by focus or hover</li>
+	</ul>
+
+
+
+</p>
+	<div class="test">
 		<form class="todo-list">
-      <legend>My todos</legend>
+      <legend class="todo-list-title">My todos</legend>
       <fieldset title="Add new todos here" class="todos-add-new">
+      	<!--TODO placeholder shim-->
         <input class="todo-input" type="text" name="todo-new" placeholder="New todo&hellip;" title="Enter your new todo here" />
+        <input class="todo-action" type="submit" name="action" value="add todo" title="Add new todo">
       </fieldset>
       <fieldset class="todos-current-list">
         <legend class="descriptive">Your current todo list</legend>
         <ul class="todos">
-          <!-- state classnames are generic - need to check  NHS/Nice best practices -->
-          <li id="todo-1" class="todo removed" title="This todo has been removed" />
-            <input class="todo-checkbox" type="checkbox" value="todo-1" />
-            <input class="todo-text" type="text" value="Task removed example"  />
-            <!-- arguably this shouldn't be here BUT user ought to be able to delete as well as remove - also consistency is nice-->
-            <input class="todo-action" type="submit" value="delete todo 1" />
+          <!-- state classnames are generic - hopefully not tied to tagnames - should really check  NHS/Nice best practices -->
+          <li id="todo-1" class="todo removed" title="Removed todo" tabindex="0"/>
+          	<!--no checkbox here as no action to perform-->
+            <input class="todo-text" name="todo-1" type="text" value="Task removed example" title="Todo description" />
+            <!--remove action not necessary-->
           </li>
-          <li id="todo-2" class="todo incomplete">
-            <input class="todo-checkbox" type="checkbox" value="todo-2" />
-            <input class="todo-text" type="text" value="Task not completed example" />
-            <input class="todo-action" type="submit" value="remove todo 2" />
+          <li id="todo-2" class="todo incomplete" title="Incomplete todo" tabindex="0">
+            <input class="todo-checkbox" type="submit" name="action" value="complete todo-2" title="Mark todo as complete" />
+            <input class="todo-text" name="todo-2" type="text" value="Task not completed example"  title="Todo description" />
+            <input class="todo-action" type="submit" name="action" value="remove todo-2" title="Remove todo"/>
           </li>
-          <li id="todo-3" class="todo incomplete active">
-            <input class="todo-checkbox" type="checkbox" value="todo-3" />
-            <input class="todo-text" type="text" value="Task not completed active" />
-            <input class="todo-action" type="submit" value="remove todo 3" />
+          <li id="todo-3" class="todo incomplete active" title="Incomplete todo" tabindex="0">
+            <input class="todo-checkbox" type="submit" name="action" value="complete todo-3" title="Mark todo as complete"/>
+            <input class="todo-text" name="todo-3" type="text" value="Task not completed active"  title="Todo description"/>
+            <input class="todo-action" type="submit" name="action" value="remove todo-3" title="Remove todo"/>
           </li>
-          <li id="todo-4" class="todo complete">
-            <input class="todo-checkbox" class="todo-text" type="checkbox" value="todo-4" disabled="disabled"/>
-            <input class="todo-text" type="text" value="Task completed example" />
-            <!-- again user ought to be able to remove completed todos... -->
-            <input class="todo-action" type="submit" value="delete todo 4" />
+          <li id="todo-4" class="todo complete" title="Completed todo" tabindex="0">
+          	<!--no checkbox here as no action to perform-->
+            <input class="todo-text" name="todo-4" type="text" value="Task completed example" readonly="readonly" title="Todo description" />
+            <!--remove action not necessary but delete might be nice-->
           </li>
         </ul>
       </fieldset>
     </form>
+	</div>
 	</body>
 </html>

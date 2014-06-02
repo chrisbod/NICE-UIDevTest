@@ -23,17 +23,18 @@ $removed-color: rgb(136,136,136);
 
 
 .todo-list,
-.todo-list input {
+.todo-list input {/*input is added to force inheritance if controls are used*/
 	font-family: lato, arial, helvetica, verdana, sans-serif;
 	color: rgb(0,0,0);
 	font-size: 16px;
+	background-color: transparent;
 }
-.todo-list fieldset {
+.todo-list fieldset {/*reset fieldsets to match other block elements*/
 	border-width: 0;
 	margin: 0;
 	padding: 0;
 }
-.todo-list > legend {
+.todo-list .todo-list-title {
 	font-size: 44px;
 	font-weight: 300;
 	height: 70px;
@@ -65,9 +66,9 @@ $removed-color: rgb(136,136,136);
 	list-style: none;
 }
 .todo-list .todo {
-	height: 22px;
+	height: 24px;
 	position: relative;
-	padding: 13px 51px;
+	padding: 12px 53px;
 }
 
 
@@ -80,17 +81,29 @@ $removed-color: rgb(136,136,136);
 	height: 28px;
 	border: 0;
 	position: absolute;
-	visibility: hidden; /*change for aural stylesheets?*/
+	
 }
 
 .todo-list .todo-action {
 	right: 4px;
 	top: 12px;
 	color: transparent;
+	background-repeat: no-repeat;
+	background-position: center;
+	display: none;
+}
+.todo-list .todo.incomplete:focus .todo-action,
+.todo-list .todo.incomplete *:focus ~ .todo-action,
+.todo-list .todo.incomplete .todo-action:focus,
+.todo-list .todo.incomplete:hover .todo-action,
+.todo-list .todo.active .todo-action {
+	display: block;
+	background-image: url(images/remove.png);
 }
 .todo-list .todo-checkbox {
-	left: 6px;
-	top: 8px;
+	left: 10px;
+	top: 10px;
+	color: transparent;
 }
 .todo-list .todo-text {
 	border-width: 0;
@@ -100,6 +113,17 @@ $removed-color: rgb(136,136,136);
 	text-decoration: line-through;
 	color: rgb(136,136,136);
 }
+.todo-list .todo {
+	background-image: url(images/disc.png);
+	background-repeat: no-repeat;
+	background-position: 10px 11px;
+}
 .todo-list .complete .todo-text {
 	color: rgb(59,95,67);
+}
+.todo-list .complete {
+	background-image: url(images/tick.png);
+}
+.todo-list .removed {
+	background-image: url(images/cross.png);
 }
