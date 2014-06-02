@@ -28,9 +28,14 @@
 		 	background-image: url(design.jpg);
 		 	background-repeat: no-repeat;
 		 	margin: 0;
+		 	padding: 39px 126px; 
+
 		 }
 		 body {
 		 	margin: 0;
+		 	padding: 0;
+		 	width: 638px;
+		 	height: 480px;
 		 }
 		 * {outline: 1px dotted silver; background-color: transparent}
 		 </style>
@@ -42,7 +47,7 @@
         <input type="text" name="todo-new" placeholder="New todo&hellip;" title="Enter your new todo here" />
       </fieldset>
       <fieldset class="todos-current-list">
-        <legend>Your current todo list</legend>
+        <legend class="descriptive">Your current todo list</legend>
         <ul class="todos">
           <!-- state classnames are generic - need to check  NHS/Nice best practices -->
           <li id="todo-1" class="todo removed" title="This todo has been removed" />

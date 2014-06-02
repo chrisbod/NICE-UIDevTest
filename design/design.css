@@ -1,0 +1,91 @@
+/*poached from NICE beta site*/
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,500,600,700);
+
+
+/* COLOR guide (not using SASS/LESS but why not prep)
+
+$text-color: rgb(0,0,0);
+$lines-low-light: rgb(233,233,233);
+$lines-high-light: rgb(245,245,245);
+
+text color is probably wrong due to anti-aliasing
+
+$complete-color: rgb(59,95,67);
+$removed-color: rgb(136,136,136);
+
+
+
+*/
+
+
+
+
+.todo-list,
+.todo-list input {
+	font-family: lato, arial, helvetica, verdana, sans-serif;
+	color: rgb(0,0,0);
+	font-size: 16px;
+}
+.todo-list fieldset {
+	border-width: 0;
+	margin: 0;
+	padding: 0;
+}
+.todo-list > legend {
+	font-size: 44px;
+	font-weight: 300;
+	height: 70px;
+	border-bottom: 2px solid rgb(245,245,245);
+	width: 396px;
+	margin-left: 2px;
+	text-indent: -2px;/*bit cheeky*/
+}
+.todo-list .todos-add-new {
+	padding: 30px 0 23px 52px;/*slightly unpleasant numbers here - look into margins and padding?*/
+}
+.todo-list .todos {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 400px;
+}
+.lt-ie9 .todo-list li {
+	list-style: none;
+}
+.todo-list .todo {
+	height: 22px;
+	position: relative;
+	padding: 13px 51px;
+}
+
+
+.todo-list .descriptive {
+	display: none;
+}
+.todo-list .todo-action,
+.todo-list .todo-checkbox {
+	width: 28px;
+	height: 28px;
+	border: 0;
+	position: absolute;
+}
+
+.todo-list .todo-action {
+	right: 4px;
+	top: 12px;
+	color: transparent;
+}
+.todo-list .todo-checkbox {
+	left: 6px;
+	top: 8px;
+}
+.todo-list .todo-text {
+	border-width: 0;	
+}
+.todo-list .removed .todo-text {
+	text-decoration: line-through;
+	color: rgb(136,136,136);
+}
+.todo-list .complete .todo-text {
+	color: rgb(59,95,67);
+}
