@@ -17,6 +17,8 @@ $removed-color: rgb(136,136,136);
 
 */
 
+/*TODOS - refactor margins and paddings against a style guide*/
+
 
 
 
@@ -41,7 +43,17 @@ $removed-color: rgb(136,136,136);
 	text-indent: -2px;/*bit cheeky*/
 }
 .todo-list .todos-add-new {
-	padding: 30px 0 23px 52px;/*slightly unpleasant numbers here - look into margins and padding?*/
+	padding: 30px 0 17px 52px;/* unpleasant numbers here - look into margins and padding on all elements etc*/
+}
+.todo-list .todo-input {
+	margin: 1px;
+	border-top: 2px solid rgb(233,233,233);
+	border-bottom: 2px solid rgb(233,233,233);
+	border-left: 1px solid rgb(245,245,245);
+	border-right: 1px solid rgb(245,245,245);
+	width: 269px;
+	height: 27px;
+	padding: 1px 7px;
 }
 .todo-list .todos {
 	list-style: none;
@@ -68,6 +80,7 @@ $removed-color: rgb(136,136,136);
 	height: 28px;
 	border: 0;
 	position: absolute;
+	visibility: hidden; /*change for aural stylesheets?*/
 }
 
 .todo-list .todo-action {
@@ -80,7 +93,8 @@ $removed-color: rgb(136,136,136);
 	top: 8px;
 }
 .todo-list .todo-text {
-	border-width: 0;	
+	border-width: 0;
+	width: 312px;	
 }
 .todo-list .removed .todo-text {
 	text-decoration: line-through;
