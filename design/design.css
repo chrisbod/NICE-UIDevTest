@@ -19,9 +19,6 @@ $removed-color: rgb(136,136,136);
 
 /*TODOS - refactor margins and paddings against a style guide*/
 
-
-
-
 .todo-list,
 .todo-list input {/*input is added to force inheritance if controls are used*/
 	font-family: lato, arial, helvetica, verdana, sans-serif;
@@ -40,11 +37,16 @@ $removed-color: rgb(136,136,136);
 	height: 70px;
 	border-bottom: 2px solid rgb(245,245,245);
 	width: 396px;
-	margin-left: 2px;
-	text-indent: -2px;/*bit cheeky*/
+	margin: 0 0 0 2px;
+	padding: 0;
 }
 .todo-list .todos-add-new {
 	padding: 30px 0 17px 52px;/* unpleasant numbers here - look into margins and padding on all elements etc*/
+
+}
+.lt-ie8 .todo-list .todos-add-new {
+	padding-top: 10px;
+
 }
 .todo-list .todo-input {
 	margin: 1px;
@@ -56,13 +58,19 @@ $removed-color: rgb(136,136,136);
 	height: 27px;
 	padding: 1px 7px;
 }
+.lt-ie8 .todo-list .todo-input{
+	height: 25px;
+	width: 271px;
+	padding: 3px 6px 0 6px;
+	margin-top: 20px;
+}
 .todo-list .todos {
 	list-style: none;
 	padding: 0;
 	margin: 0;
 	width: 400px;
 }
-.lt-ie9 .todo-list li {
+.lt-ie9 .todo-list .todos > * {
 	list-style: none;
 }
 .todo-list .todo {
@@ -70,7 +78,6 @@ $removed-color: rgb(136,136,136);
 	position: relative;
 	padding: 11px 53px;
 }
-
 
 .todo-list .descriptive {
 	display: none;
@@ -85,26 +92,45 @@ $removed-color: rgb(136,136,136);
 }
 
 .todo-list .todo-action {
-	right: 4px;
-	top: 12px;
-	color: transparent;
+	right: 3px;
+	top: 11px;
 	background-repeat: no-repeat;
 	background-position: center;
 	display: none;
 }
+
+.todo-list .todo-action,
+.todo-list .todo-checkbox {
+	color: transparent;
+}
+.lt-ie9 .todo-list .todo-checkbox,
+.lt-ie9 .todo-list .todo-action  {
+ 	font-size: 0;
+}
+.lt-ie8 .todo-list .todo-checkbox,
+.lt-ie8 .todo-list .todo-action  {
+ 	padding-left: 100px;
+}
+
+/*this css handles the visibility of the action button
+including ensuring that when the hover goes out but the action has been given keyboard focus
+*/
+.todo-list .todo-action:focus,
 .todo-list .todo.incomplete:focus .todo-action,
-.todo-list .todo.incomplete *:focus ~ .todo-action,
+.todo-list .todo.incomplete :focus ~ .todo-action,
 .todo-list .todo.incomplete .todo-action:focus,
 .todo-list .todo.incomplete:hover .todo-action,
-.todo-list .todo.active .todo-action {
+.lt-ie9 .todo-list .todo-action.iefocus,
+.lt-ie9 .todo-list .todo.incomplete .iefocus ~ .todo-action,
+.lt-ie9 .todo-list .todo.iefocus .todo-action {
 	display: block;
 	background-image: url(images/remove.png);
 }
 .todo-list .todo-checkbox {
 	left: 10px;
 	top: 10px;
-	color: transparent;
 }
+
 .todo-list .todo-text {
 	border-width: 0;
 	width: 312px;	
@@ -116,7 +142,10 @@ $removed-color: rgb(136,136,136);
 .todo-list .todo {
 	background-image: url(images/disc.png);
 	background-repeat: no-repeat;
-	background-position: 10px 11px;
+	background-position: 10px 10px;
+}
+.lt-ie9 .todo-list .todo {
+	background-position: 10px 9px;
 }
 .todo-list .complete .todo-text {
 	color: rgb(59,95,67);
