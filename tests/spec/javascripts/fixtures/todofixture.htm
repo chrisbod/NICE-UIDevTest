@@ -1,4 +1,4 @@
-<form class="todo-list">
+<form class="todo-list STATIC">
 	 <h3 class="todo-list-title">My todos</h3><!-- this should be a legend but IE...-->
 	 <fieldset title="Add new todos here" class="todos-add-new">
 	  	<!--TODO placeholder shim-->
@@ -14,6 +14,23 @@
 	            <input class="todo-checkbox" type="submit" name="action" value="complete todo-1" title="Mark todo as complete"/>
 	            <input class="todo-action" type="submit" name="action" value="remove todo-2" title="Remove todo"/>
 	          </li>
+	          <li id="todo-2" class="todo incomplete STATIC-TRIM-TEST" title="Incomplete todo" tabindex="0">
+	            <input class="todo-text" name="todo-2" type="text" value="i have whitespace" title="Todo description" />
+	            <input class="todo-checkbox" type="submit" name="action" value="complete todo-2" title="Mark todo as complete"/>
+	            <input class="todo-action" type="submit" name="action" value="remove todo-2" title="Remove todo"/>
+	          </li>
+	          <li id="todo-3" class="todo incomplete" title="Incomplete todo" tabindex="0">
+	            <input class="todo-text" name="todo-2" type="text" value="todo - mark me completed" title="Todo description" />
+	            <input class="todo-checkbox" type="submit" name="action" value="complete todo-3" title="Mark todo as complete"/>
+	            <input class="todo-action" type="submit" name="action" value="remove todo-3" title="Remove todo"/>
+	          </li>
+	          <li id="todo-4" class="todo complete STATIC-COMPLETE-TEST" title="complete todo" tabindex="0">
+	            <input class="todo-text" name="todo-4" type="text" value="todo - mark me completed" title="Todo description" />
+	            <input class="todo-action" type="submit" name="action" value="remove todo-4" title="Remove todo"/>
+	          </li>
+
 	 		</ul>
+
+	 		
 	<fieldset>
 </form>
