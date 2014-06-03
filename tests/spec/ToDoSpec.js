@@ -15,12 +15,15 @@ describe("Todo Data Model tests", function() {
 
     //programmatical tests//
 
-    it("A blank todo should have a unique id",
+    it("A blank todo should have a readonly unique id",
         //can't help being a programmer so we'll expect every todo to have an id (but not check it's actually value as we don't know it's format)
         function() {
             expect(todo.id()).toBeTruthy();
             var newTodo = new TodoModel();
             expect(newTodo.id()).not.toEqual(todo.id())
+            var id = newTodo.id();
+            newTodo.id("testId");
+            expect(id).toEqual(newTodo.id())
         }
     );
     //More Behavioural states
