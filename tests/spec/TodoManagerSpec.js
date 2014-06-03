@@ -19,7 +19,7 @@ describe("TodoManager unit tests", function() {
             expect(todoManager.todos()[0]).toEqual(newTodo);
         }
     );
-    it("removing a todo (not deleting) should give us a removed todo but not delete the todo",
+    it("removing a todo (not deleting) should give us a removed todo and delete the todo",
         function() {
             var newTodo = todoManager.newTodo();
             todoManager.removeTodo(newTodo);
@@ -28,6 +28,27 @@ describe("TodoManager unit tests", function() {
             expect(todoManager.todos()[0]).toEqual(newTodo);
         }
     );
+    it("completing a todo should give us a complete todo",
+        function() {
+            var newTodo = todoManager.newTodo();
+            todoManager.completeTodo(newTodo)
+            expect(newTodo.state()).toEqual("completed");
+            expect(todoManager.completedTodos()[0]).toEqual(newTodo);
+        }
+    );
 
+    //slightly more complex test to check that the list of all todos is unaffected by marking items remove and completed
+    it("Adding three todos, marking the first as completed, the second as removed, should result in a total of 3 todos, 1 completed, and 1 removed",
+        function() {
+            var todoForCompletion = todoManager.newTodo(),
+                todoForRemoval = todoManager.newTodo(),
+                todo = todoManager.newTodo();
+            todoForCompletion.state("completed");
+            todoForRemoval.state("removed");
+            expect(todoManager.todos().length).toEqual(3);
+            expect(todoManager.completedTodos().length).toEqual(1);
+            expect(todoManager.removedTodos().length).toEqual(1);
+        }
+    );
 
-})
+});
