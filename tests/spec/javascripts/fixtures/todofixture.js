@@ -3,7 +3,7 @@
 Behavioural story
 
 Initial load (no todos)
-The create todo component should be visible
+The create todo component should be visible (including an input element of some type)
 
 Within the story 
 click means: hitting enter, clicking or tapping on a focussed element
@@ -53,41 +53,30 @@ User edits second of new tasks and
 
 */
 
+describe("todo list html fixture tests", function() {
+    beforeEach(function() {
+        loadFixtures('todofixture.htm');
+    })
 
+    it("the todo list container should be present and visible", function() {
+        expect($(".todo-list")).toBeVisible();
+    });
+    it("there should be an element for inputting the new todo and it should be visible", function() {
+        expect($(".todo-input")).toBeVisible();
+    });
+    it("the input element should accept user input (programmatically simulated)", function() {
+        var input = $(".todo-input"),
+            text = "my first todo";
+        input.sendkeys(text);
+        var output = input.val() || input.text(); //we don't know id its an input or an element
+        expect(output).toEqual(text)
+    })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /*
+var e = jQuery.Event("keydown");
+        e.which = 13; // # Some key code value
+        input.trigger(e);
 
 */
+
+})

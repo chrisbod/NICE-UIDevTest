@@ -15,14 +15,21 @@
   <script type="text/javascript" src="lib/jquery-1.11.1.js"></script>
   <script type="text/javascript" src="lib/jasmine-jquery.js"></script>
 
+  <!--general plugins to be used -->
+  <script type="text/javascript" src="lib/bililiteRange.js"></script>
+  <script type="text/javascript" src="lib/jquery.sendkeys.js"></script>
+
   <!-- include source files here... -->
 
   <script type="text/javascript" src="../src/scripts/utils.js"></script>
   <script type="text/javascript" src="../src/scripts/TodoModel.js"></script>
   <script type="text/javascript" src="../src/scripts/TodoManager.js"></script>
 
-  <!-- include spec files here... -->
-  <script type="text/javascript" src="fixtures/UIFixture.js"></script>
+  <!-- include fixture files here... -->
+  <script type="text/javascript" src="spec/javascripts/fixtures/todofixture.js"></script>
+  <script>
+  jasmine.getFixtures('todofixture.js')
+  </script>
 </head>
 
 <body>
