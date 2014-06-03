@@ -1,20 +1,19 @@
 /*this is the view controller (or view model if we're using MVVM/knockout)*/
 function TodoManager() {
     this._todos = [];
-    this._completedTodos = [];
-    this._removedTodos = [];
 }
 TodoManager.prototype = {
     _todos: null, //array
     todos: function() {
         return this._todos;
     },
-    _completedTodos: null, //array
     completedTodos: function() {
-        return this._completedTodos;
+        var filterCompleted = this._filterByStateFunction("completed");
+        return this._todos.filter(filterCompleted);
     },
     removedTodos: function() {
-        return this._removedTodos;
+        var filterRemoved = this._filterByStateFunction("removed");
+        return this._todos.filter(filterRemoved);
     },
     newTodo: function() {
         var todo = new TodoModel();
@@ -27,22 +26,15 @@ TodoManager.prototype = {
      and/or the provision of a delete action for removed todos (or all todos)*/
     removeTodo: function(todo) {
         todo.state("removed");
-        var identityFilter = this._filterFunction(todo);
-        this._todos.filter(identityFilter);
-        this._completedTodos.filter(identityFilter);
-        this._removedTodos.push(todo);
     },
     completeTodo: function(todo) {
         todo.state("completed");
-        if (this._completedTodos.indexOf(todo) == -1) {
-            this._completedTodos.push(todo);
-        }
     },
-    _filterFunction: function(itemToRemove) {
+    _filterByStateFunction: function(state) {
         return (
             function(item) {
-                return item !== itemToRemove;
+                return (item.state() == state);
             }
-        )
+        );
     }
 }
