@@ -47,4 +47,17 @@ describe("Todo Data Model tests", function() {
             expect(todo.editing()).toEqual(false);
         }
     );
+    it("Setting a todo's text should work...", function() {
+        todo.text("New text");
+        expect(todo.text()).toEqual("New text");
+    });
+    it("Setting a todo's state should work...", function() {
+        todo.state("completed");
+        expect(todo.state()).toEqual("completed");
+    });
+    it("Setting a todo's state to an unsupported value should be ignored", function() {
+        todo.state("invalid state");
+        expect(todo.state()).toEqual("incomplete");
+    })
+
 })
