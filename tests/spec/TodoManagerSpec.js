@@ -19,7 +19,7 @@ describe("TodoManager unit tests", function() {
             expect(todoManager.todos()[0]).toEqual(newTodo);
         }
     );
-    it("removing a todo (not deleting) should give us a removed todo and delete the todo",
+    it("removing a todo (not deleting) should give us a removed todo",
         function() {
             var newTodo = todoManager.newTodo();
             todoManager.removeTodo(newTodo);
