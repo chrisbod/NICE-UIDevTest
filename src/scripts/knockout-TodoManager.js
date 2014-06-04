@@ -1,9 +1,23 @@
 function TodoManager(data) {
+    var self = this;
     if (!data) {
         data = {};
     }
-    var self = this;
     this.todos = ko.observableArray(data.todos || this.todos());
+    this._createComputedCollections();
+}
+
+
+//defaults
+TodoManager.prototype.todos = function() {
+    return [];
+}
+
+
+//methods
+
+TodoManager.prototype._createComputedCollections = function() {
+    var self = this;
     this.removedTodos = ko.computed(function() {
         return ko.utils.arrayFilter(self.todos(), self.todoIsRemoved);
     });
@@ -13,13 +27,6 @@ function TodoManager(data) {
 }
 
 
-//defaults
-TodoManager.prototype.todos = function() {
-    return [];
-}
-TodoManager.prototype.removedTodos = function() {
-    return [];
-}
 TodoManager.prototype.newTodo = function() {
     var todo = new TodoModel();
     this.todos.push(todo);
