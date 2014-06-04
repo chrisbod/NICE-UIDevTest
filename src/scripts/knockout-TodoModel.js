@@ -51,3 +51,12 @@ ko.extenders.trimWhitespace = function(target) {
         target(newValue.trim(), newValue.trim());
     });
 }
+
+if (!ko.bindingHandlers.readonly) { //future proofing I hope
+    ko.bindingHandlers.readonly = {
+        update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+            element.readOnly = valueAccessor();
+        }
+    }
+
+}
