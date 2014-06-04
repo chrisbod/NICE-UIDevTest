@@ -59,47 +59,57 @@
 		<li>An H3 tag has been used instead of a legend tag (ie of course) - again shims could be used - some additional css might be required to format the legend tag properly</li>
 	</ul>
 	<div class="test">
-		<form class="todo-list">
-      <h3 class="todo-list-title">My todos</h3><!-- this should be a legend but IE...-->
-      <fieldset title="Add new todos here" class="todos-add-new">
-      	<!--TODO placeholder shim-->
-        <input class="todo-input" type="text" name="todo-new" placeholder="New todo&hellip;" title="Enter your new todo here" />
-        <input class="todo-action" type="submit" name="action" value="add todo" title="Add new todo">
-      </fieldset>
-      <fieldset class="todos-current-list">
-        <!--legend class="descriptive">Your current todo list</legend-->
-        <ul class="todos">
-          <!-- state classnames are generic - hopefully not tied to tagnames - should really check  NHS/Nice best practices -->
-          <li id="todo-1" class="todo removed" title="Removed todo" tabindex="0"/>
-          	
-            <input class="todo-text" name="todo-1" type="text" value="Task removed example" title="Todo description" />
-            <input class="todo-checkbox" type="submit" name="action" value="complete todo-1" title="Mark todo as complete" disabled="disabled"/>
-            <!--remove action not necessary but delete might be nice-->
-            <input class="todo-action" type="submit" name="action" value="delete todo-1" title="Delete todo" disabled="disabled"/>
-          </li>
-          <li id="todo-2" class="todo incomplete" title="Incomplete todo" tabindex="0">
-            
-            <input class="todo-text" name="todo-2" type="text" value="Task not completed example"  title="Todo description" />
-            <input class="todo-checkbox" type="submit" name="action" value="complete todo-2" title="Mark todo as complete" />
-            <input class="todo-action" type="submit" name="action" value="remove todo-2" title="Remove todo"/>
-          </li>
-          <li id="todo-3" class="todo incomplete active" title="Incomplete todo" tabindex="0">
-            
-            <input class="todo-text" name="todo-3" type="text" value="Task not completed active"  title="Todo description"/>
-            <input class="todo-checkbox" type="submit" name="action" value="complete todo-3" title="Mark todo as complete"/>
-            <input class="todo-action" type="submit" name="action" value="remove todo-3" title="Remove todo"/>
-          </li>
-          <li id="todo-4" class="todo complete" title="Completed todo" tabindex="0">
-          	
-            <input class="todo-text" name="todo-4" type="text" value="Task completed example" readonly="readonly" title="Todo description" />
-            <!--this action is not specified and will not be rendered (or focused)-->
-          	<input class="todo-checkbox" type="submit" name="action" value="incomplete todo-4" title="Mark todo as incomplete" disabled="disabled"/>
-            <!--remove action not necessary but delete might be nice-->
-            <input class="todo-action" type="submit" name="action" value="delete todo-4" title="Delete todo" disabled="disabled"/>
-          </li>
-        </ul>
-      </fieldset>
-    </form>
+<form class="todo-list STATIC">
+	 <legend class="todo-list-title">My todos</legend>
+	 <div title="Add new todos here" class="todos-add-new">
+	  	<!--TODO placeholder shim-->
+	    <input class="todo-input" type="text" placeholder="New todo&heldivp;" title="Enter your new todo here" />
+	    <input class="todo-action" type="submit" value="add todo" title="Add new todo">
+	</div>
+	<div class="todos-current-list">
+	        <!--legend class="descriptive">Your current todo list</legend-->
+	        <div class="todos">
+	          <!-- state classnames are generic - hopefdivly not tied to tagnames - shodivd really check  NHS/Nice best practices -->
+	          <div class="todo incomplete" title="Incomplete todo" tabindex="0">
+	            <input class="todo-text" type="text" value="my first todo" title="Todo description" />
+	            <input class="todo-checkbox" type="submit" title="Mark todo as complete"/>
+	            <input class="todo-action" type="submit" title="Remove todo"/>
+	          </div>
+	          <div class="todo incomplete STATIC-TRIM-TEST" title="Incomplete todo" tabindex="0">
+	            <input class="todo-text" type="text" value="i have whitespace" title="Todo description" />
+	            <input class="todo-checkbox" type="submit" title="Mark todo as complete"/>
+	            <input class="todo-action" type="submit" title="Remove todo"/>
+	          </div>
+	          <div class="todo incomplete" title="Incomplete todo" tabindex="0">
+	            <input class="todo-text" type="text" value="todo - mark me completed" title="Todo description" />
+	            <input class="todo-checkbox" type="submit" title="Mark todo as complete"/>
+	            <input class="todo-action" type="submit" title="Remove todo"/>
+	          </div>
+	          <div class="todo complete STATIC-COMPLETE-TEST" title="complete todo" tabindex="0">
+	            <input class="todo-text" type="text" value="todo - mark me completed" title="Todo description" />
+	            <input class="todo-action" type="submit" title="Remove todo"/>
+	          </div>
+	          <div class="todo complete STATIC-FOCUS-TEST" title="complete todo" tabindex="0">
+	            <input class="todo-text" type="text" value="focus test" title="Todo description" />
+	            <input class="todo-action" type="submit" title="Remove todo"/>
+	          </div>
+	            <div class="todo complete STATIC-ESCAPE-TEST" title="complete todo" tabindex="0">
+	            <input class="todo-text" type="text" value="escape text" title="Todo description" />
+	            <input class="todo-action" type="submit" title="Remove todo"/>
+	          </div>
+	          <div class="todo incomplete STATIC-REMOVE-TEST" title="complete todo" tabindex="0">
+	            <input class="todo-text" type="text" value="remove me" title="Todo description" />
+	            <input class="todo-checkbox" type="submit" title="Mark todo as complete"/>
+	            <input class="todo-action" type="submit" title="Remove todo"/>
+	          </div>
+	          <div class="todo incomplete STATIC-DBLCdivCK-TEST" title="complete todo" tabindex="0">
+	            <input class="todo-text" type="text" value="dblcdivck test" title="Todo description" />
+	            <input class="todo-checkbox" type="submit" title="Mark todo as complete"/>
+	            <input class="todo-action" type="submit" title="Remove todo"/>
+	          </div>
+	 		</div>
+	<div>
+</form>
 	</div>
 	</body>
 </html>
