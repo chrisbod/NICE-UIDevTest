@@ -64,7 +64,7 @@ describe("todo list html fixture tests", function() {
     var text = "my first todo"
 
     beforeEach(function() {
-        loadFixtures('todofixture.htm');
+        loadFixtures(window.TODO_FIXTURE_HTML);
         window.STATIC = $(".todo-list.STATIC")
         if (STATIC) {
             document.title = "STATIC tests";
