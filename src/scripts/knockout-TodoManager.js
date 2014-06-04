@@ -26,14 +26,16 @@ TodoManager.prototype._createComputedCollections = function() {
     });
 }
 
+TodoManager.prototype.lastCreatedTodoText = null;
 
 TodoManager.prototype.newTodo = function(manager, jQueryEvent) {
-    var todoData = {};
-    if (jQueryEvent) {
-        todoData = {
-            text: jQueryEvent.target.value
-        }
+    var todoData = {
+        text: "Unnamed todo"
+    };
+    if (jQueryEvent && jQueryEvent.target.value) { //slightly unsatisfactory but other solutions to these seem equally ugly
+        todoData.text = jQueryEvent.target.value;
     }
+    this.lastCreatedTodoText = todoData.text;
     var todo = new TodoModel(todoData);
     this.todos.push(todo);
     return todo;
@@ -49,4 +51,13 @@ TodoManager.prototype.completeTodo = function(todo) {
 }
 TodoManager.prototype.todoIsComplete = function(todo) {
     return todo.state() == "completed";
+}
+TodoManager.prototype.duplicateCheck = function(manager, jQueryEvent) {
+    if (jQueryEvent.keyCode == 13) { //enter
+        if (this.lastCreatedTodoText == jQueryEvent.target.value) {
+            //repeat
+            this.newTodo(this, jQueryEvent)
+        }
+    }
+    return true;
 }

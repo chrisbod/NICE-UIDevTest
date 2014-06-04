@@ -54,19 +54,18 @@
 		</script>
 	</head>
 	<body>
-		<form id="knockout-list" class="todo-list">
+		<form id="knockout-list" class="todo-list" data-bind="submit: function () {return false}">
 			 <h3 class="todo-list-title">My todos</h3>
 			 <fieldset title="Add new todos here" class="todos-add-new">
 			  	<!--TODO placeholder shim-->
-			    <input class="todo-input" placeholder="New todo&hellip;" title="Enter your new todo here" data-bind="event:{change:newTodo}" />
+			    <input class="todo-input" placeholder="New todo&hellip;" title="Enter your new todo here" data-bind="event:{change:newTodo,keypress:duplicateCheck}" />
 			</fieldset>
 
 			<fieldset class="todos-current-list">
 			        <ul class="todos" data-bind="foreach: todos,visible: todos().length != 0">
 			        	<li class="todo" data-bind="css: state">
 			        		<input type="button" class="todo-checkbox" data-bind="event:{click:$parent.completeTodo}"/>
-				            <input class="todo-text" data-bind="value: text, readonly:state() != 'incomplete'"/>
-				            
+				            <input class="todo-text" data-bind="value: text, readonly:state() != 'incomplete'"/>        
 				            <input type="button" class="todo-action" data-bind="event:{click: $parent.removeTodo}"/>
 			          </li>
 			        </ul>
