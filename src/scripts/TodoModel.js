@@ -1,8 +1,10 @@
 /*for the moment keeping our objects in the global namespace*/
-function TodoModel(text) {
+function TodoModel(data) {
     this._id = "todo" + TodoModel.count++;
-    if (text) {
-        this.text(text)
+    if (data) {
+        if (data.text) {
+            this.text(data.text)
+        }
     }
 }
 TodoModel.count = 0;
