@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"  class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+<!--Some TODOs (From beta NICE site)
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="google-site-verification" content="3N3Ng_4D9vTfn0AubNl1BjDivNeDmo_erefsd_ClwL4"/>
+		<meta name="viewport" content="initial-scale = 1, user-scalable = no">
+		<link rel="apple-touch-icon" href="/Media/images/apple-icon.png"/>
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+		<link rel="icon" href="/favicon.ico" type="imge/x-icon"/>
+		<link rel="stylesheet" type="text/css" href="">
+-->
+		<title>NICE UI Dev Test - To do List	</title>
+		<meta name="description" content="NICE UI Dev Tet - To do List - Christian Bodart's attempt"/>
+		 <link rel="stylesheet" type="text/css" href="design.css"/>
+		 <style>
+		 /*template*/
+		 .test {
+		 	background-image: url(design.jpg);
+		 	background-repeat: no-repeat;
+		 	margin: 0;
+		 	padding: 39px 126px; 
+		 }
+		 .lt-ie8 .test{
+		 	padding: 21px 126px;
+		 }
+		 body {
+		 	margin: 0;
+		 	padding: 0;
+		 	width: 638px;
+		 	height: 480px;
+		 }	
+		 </style>
+		 <!--[if IE 7]>
+		<script src="scripts/ie7-css.js"></script>
+		<![endif]-->
+
+	</head>
+	<body>
+<h1>Template</h1>
+<h2>This page has no javascript but would work with server side scripting (not tested)</h2>
+	<ul>
+		<li>The todo descriptions are input fields and thus do not require doubleclicks to edit</li>
+		<li>The placeholder on the new todo input field is not supported by IE9 or less</li>
+		<li>Currently the todos are submitted when enter (or equivalent) is hit in text field</li>
+		<li>Ok in IE now (except placeholder attribute - shim could be used)</li>
+		<li>Classes are arguably over used but this way it allows for more markup flexibility</li>
+		<li>The active node cross (if visible) is there only for styling as it is triggered by focus or hover</li>
+		<li>There are extra (nonvisible/focussable) elements in the document that could provide desired future functionality</li>
+		<li>An H3 tag has been used instead of a legend tag (ie of course) - again shims could be used - some additional css might be required to format the legend tag properly</li>
+	</ul>
+	<div class="test">
+		<form class="todo-list">
+      <h3 class="todo-list-title">My todos</h3><!-- this should be a legend but IE...-->
+      <fieldset title="Add new todos here" class="todos-add-new">
+      	<!--TODO placeholder shim-->
+        <input class="todo-input" type="text" name="todo-new" placeholder="New todo&hellip;" title="Enter your new todo here" />
+        <input class="todo-action" type="submit" name="action" value="add todo" title="Add new todo">
+      </fieldset>
+      <fieldset class="todos-current-list">
+        <!--legend class="descriptive">Your current todo list</legend-->
+        <ul class="todos">
+          <!-- state classnames are generic - hopefully not tied to tagnames - should really check  NHS/Nice best practices -->
+          <li id="todo-1" class="todo removed" title="Removed todo" tabindex="0"/>
+          	
+            <input class="todo-text" name="todo-1" type="text" value="Task removed example" title="Todo description" />
+            <input class="todo-checkbox" type="submit" name="action" value="complete todo-1" title="Mark todo as complete" disabled="disabled"/>
+            <!--remove action not necessary but delete might be nice-->
+            <input class="todo-action" type="submit" name="action" value="delete todo-1" title="Delete todo" disabled="disabled"/>
+          </li>
+          <li id="todo-2" class="todo incomplete" title="Incomplete todo" tabindex="0">
+            
+            <input class="todo-text" name="todo-2" type="text" value="Task not completed example"  title="Todo description" />
+            <input class="todo-checkbox" type="submit" name="action" value="complete todo-2" title="Mark todo as complete" />
+            <input class="todo-action" type="submit" name="action" value="remove todo-2" title="Remove todo"/>
+          </li>
+          <li id="todo-3" class="todo incomplete active" title="Incomplete todo" tabindex="0">
+            
+            <input class="todo-text" name="todo-3" type="text" value="Task not completed active"  title="Todo description"/>
+            <input class="todo-checkbox" type="submit" name="action" value="complete todo-3" title="Mark todo as complete"/>
+            <input class="todo-action" type="submit" name="action" value="remove todo-3" title="Remove todo"/>
+          </li>
+          <li id="todo-4" class="todo complete" title="Completed todo" tabindex="0">
+          	
+            <input class="todo-text" name="todo-4" type="text" value="Task completed example" readonly="readonly" title="Todo description" />
+            <!--this action is not specified and will not be rendered (or focused)-->
+          	<input class="todo-checkbox" type="submit" name="action" value="incomplete todo-4" title="Mark todo as incomplete" disabled="disabled"/>
+            <!--remove action not necessary but delete might be nice-->
+            <input class="todo-action" type="submit" name="action" value="delete todo-4" title="Delete todo" disabled="disabled"/>
+          </li>
+        </ul>
+      </fieldset>
+    </form>
+	</div>
+	</body>
+</html>
