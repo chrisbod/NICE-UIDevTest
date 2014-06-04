@@ -127,6 +127,12 @@ including ensuring that when the hover goes out but the action has been given ke
 	display: block;
 	background-image: url(images/remove.png);
 }
+/*force remove button to be hidden when the item is removed*/
+.todo-list .todo.removed .todo-action:focus,
+.lt-ie9 .todo-list .todo.removed .todo-action.iefocus  {
+	display:none;
+}
+
 .todo-list .todo-checkbox {
 	left: 10px;
 	top: 10px;

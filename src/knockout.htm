@@ -63,10 +63,10 @@
 
 			<fieldset class="todos-current-list">
 			        <ul class="todos" data-bind="foreach: todos,visible: todos().length != 0">
-			        	<li class="todo">
+			        	<li class="todo" data-bind="css: state">
 				            <input class="todo-text" data-bind="value: text"/>
 				            <input class="todo-checkbox"/>
-				            <input class="todo-action"/>
+				            <input class="todo-action" data-bind="event:{click: $parent.removeTodo}"/>
 			          </li>
 			        </ul>
 			</fieldset>
