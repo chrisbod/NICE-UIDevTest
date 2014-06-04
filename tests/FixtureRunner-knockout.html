@@ -21,10 +21,10 @@
   <script type="text/javascript" src="lib/jquery.sendkeys.js"></script>
 
   <!-- include source files here... -->
-
+  <script type="text/javascript" src="../src/lib/knockout-3.1.0.js"></script>
   <script type="text/javascript" src="../src/scripts/utils.js"></script>
-  <script type="text/javascript" src="../src/scripts/TodoModel.js"></script>
-  <script type="text/javascript" src="../src/scripts/TodoManager.js"></script>
+  <script type="text/javascript" src="../src/scripts/knockout-TodoModel.js"></script>
+  <script type="text/javascript" src="../src/scripts/knockout-TodoManager.js"></script>
 
   <script type="text/javascript" src="spec/javascripts/fixtures/fixturehelpers.js"></script>
   <!-- include fixture files here... -->
@@ -32,6 +32,10 @@
   <script type="text/javascript" src="spec/javascripts/fixtures/todofixture.js"></script>
   <script>
   var TODO_FIXTURE_HTML = 'todofixture-knockout.htm';
+
+  function todoFixtureInit () {
+    ko.applyBindings(new TodoManager(), document.getElementById("knockout-list"));
+  }
   jasmine.getFixtures('todofixture.js');
   </script>
 <!-- temporarily use design css -->

@@ -65,8 +65,11 @@ describe("todo list html fixture tests", function() {
 
     beforeEach(function() {
         loadFixtures(window.TODO_FIXTURE_HTML);
+        if (window.todoFixtureInit) { //this is ugly
+            window.todoFixtureInit();
+        }
         window.STATIC = $(".todo-list.STATIC")
-        if (STATIC) {
+        if (STATIC.length) {
             document.title = "STATIC tests";
             STATIC[0].onsubmit = function() {
                 return false
