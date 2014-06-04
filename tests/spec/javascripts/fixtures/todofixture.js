@@ -61,12 +61,11 @@ User edits second of new tasks and
 
 describe("todo list html fixture tests", function() {
 
-    var text = "my first todo",
-        STATIC;
+    var text = "my first todo"
 
     beforeEach(function() {
         loadFixtures('todofixture.htm');
-        STATIC = $(".todo-list.STATIC")
+        window.STATIC = $(".todo-list.STATIC")
         if (STATIC) {
             document.title = "STATIC tests";
             STATIC[0].onsubmit = function() {

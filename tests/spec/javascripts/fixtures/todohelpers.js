@@ -53,7 +53,20 @@ var todoHelper = {
     checkHoverMakesVisible: function(elementToHoverOver, elementToCheckVisibility) {
         //this test is for programmatical mouseover testing
         //and assumes the 'root' todo gains a 'hover' class when moused over
+        //since the static version uses a CSS hover there will be a cheat again
         //simulating hover state is not possible
+        if (STATIC) {
+            elementToHoverOver.mouseenter(function() {
+                $(this).addClass('hover');
+            });
+            elementToHoverOver.mouseleave(function() {
+                $(this).removeClass('hover');
+            });
+        }
+        elementToHoverOver.mouseenter(); //is this sufficient?
+        expect(elementToCheckVisibility).toBeVisible();
+        elementToHoverOver.mouseleave();
+        expect(elementToCheckVisibility).not.toBeVisible();
 
     }
 }
