@@ -1,4 +1,7 @@
 function TodoModel(data) {
+    if (!data) {
+        data = {};
+    }
     this._id = "todo" + TodoModel.count++;
     this.text = ko.observable(data.text || this.text());
     this.state = ko.observable(data.state || this.state()).extend({
