@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"  class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+<!--Some TODOs (From beta NICE site)
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="google-site-verification" content="3N3Ng_4D9vTfn0AubNl1BjDivNeDmo_erefsd_ClwL4"/>
+		<meta name="viewport" content="initial-scale = 1, user-scalable = no">
+		<link rel="apple-touch-icon" href="/Media/images/apple-icon.png"/>
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+		<link rel="icon" href="/favicon.ico" type="imge/x-icon"/>
+		<link rel="stylesheet" type="text/css" href="">
+-->
+		<title>NICE UI Dev Test - To do List	</title>
+		<meta name="description" content="NICE UI Dev Tet - To do List - Christian Bodart's attempt"/>
+		 <link rel="stylesheet" type="text/css" href="../design/design.css"/>
+		 <style>
+		 /*template*/
+		 .test {
+		 	background-image: url(design.jpg);
+		 	background-repeat: no-repeat;
+		 	margin: 0;
+		 	padding: 39px 126px; 
+		 }
+		 .lt-ie8 .test{
+		 	padding: 21px 126px;
+		 }
+		 body {
+		 	margin: 0;
+		 	padding: 0;
+		 	width: 638px;
+		 	height: 480px;
+		 }	
+		 </style>
+		 <!--[if IE 7]>
+		<script src="scripts/ie7-css.js"></script>
+		<![endif]-->
+		<script src="lib/knockout-3.1.0.js"></script>
+		<script type="text/javascript" src="scripts/utils.js"></script>
+  		<script type="text/javascript" src="scripts/knockout-TodoModel.js"></script>
+  		<script type="text/javascript" src="scripts/knockout-TodoManager.js"></script>
+		<script>
+			onload = function () {
+				ko.applyBindings(new TodoManager(), document.getElementById("knockout-list"));
+			}
+		</script>
+	</head>
+	<body>
+		<form id="knockout-list" class="todo-list">
+			 <h3 class="todo-list-title">My todos</h3>
+			 <fieldset title="Add new todos here" class="todos-add-new">
+			  	<!--TODO placeholder shim-->
+			    <input class="todo-input" placeholder="New todo&hellip;" title="Enter your new todo here" data-bind="event:{change:newTodo}" />
+			</fieldset>
+
+			<fieldset class="todos-current-list">
+			        <ul class="todos" data-bind="foreach: todos,visible: todos().length != 0">
+			        	<li class="todo">
+				            <input class="todo-text" data-bind="value: text"/>
+				            <input class="todo-checkbox"/>
+				            <input class="todo-action"/>
+			          </li>
+			        </ul>
+			</fieldset>
+		</form>
+	</body>
+</html>

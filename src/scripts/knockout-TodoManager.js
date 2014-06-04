@@ -27,8 +27,14 @@ TodoManager.prototype._createComputedCollections = function() {
 }
 
 
-TodoManager.prototype.newTodo = function() {
-    var todo = new TodoModel();
+TodoManager.prototype.newTodo = function(manager, jQueryEvent) {
+    var todoData = {};
+    if (jQueryEvent) {
+        todoData = {
+            text: jQueryEvent.target.value
+        }
+    }
+    var todo = new TodoModel(todoData);
     this.todos.push(todo);
     return todo;
 }
