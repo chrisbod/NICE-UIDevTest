@@ -14,7 +14,7 @@ TodoModel.prototype.id = function() {
 TodoModel.prototype._id = "";
 TodoModel.prototype.text = function() {
     if (arguments.length) {
-        this._text = arguments[0];
+        this._text = arguments[0].toString().trim();
     }
     return this._text;
 }

@@ -3,7 +3,9 @@ function TodoModel(data) {
         data = {};
     }
     this._id = "todo" + TodoModel.count++;
-    this.text = ko.observable(data.text || this.text());
+    this.text = ko.observable(data.text || this.text()).extend({
+        trimWhitespace: true
+    });
     this.state = ko.observable(data.state || this.state()).extend({
         allowedValues: this.state_allowedValues
     });
@@ -44,3 +46,8 @@ ko.extenders.allowedValues = function(target, option) {
         }
     })
 };
+ko.extenders.trimWhitespace = function(target) {
+    target.subscribe(function(newValue) {
+        target(newValue.trim())
+    });
+}

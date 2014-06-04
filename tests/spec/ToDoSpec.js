@@ -66,6 +66,10 @@ describe("Todo Data Model tests", function() {
     it("Setting a todo's state to an unsupported value should be ignored", function() {
         todo.state("invalid state");
         expect(todo.state()).toEqual("incomplete");
+    });
+    it("A todo's text should be trimmed", function() {
+        todo.text("  Whitespace  ");
+        expect(todo.text()).toEqual("Whitespace");
     })
 
 })
