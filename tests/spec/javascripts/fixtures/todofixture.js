@@ -163,6 +163,23 @@ describe("todo list html fixture tests", function() {
             expect(completedToDoContainer.length).toEqual(1)
         }
     );
+    it("the text of a created todo is editable when doubleclicked",
+        function() {
+            //NB since the static version uses real inputs it will always pass this
+            var text = "dblclick test",
+                clickText = "clicked";
+            todoHelper.createNewTodo(text);
+            var todoElements = todoHelper.getAllTodoElementsByText(text);
+            //being faithful to what triggers in the dom
+            todoElements.text.focus();
+            todoElements.text.click();
+            todoElements.text.dblclick();
+            //NOTE: SENDKEYS DELETES out the current value so is flawed!
+            $(document.activeElement).sendkeys(clickText);
+            //not as weird as it looks really - honest - will fail if we haven't got the right todo
+            expect(todoHelper.getAllTodoElementsByText(clickText).text.val()).toEqual(clickText);
+        }
+    );
     it("the text of a created todo is editable when focussed",
         function() {
             var text = "focus test",
@@ -172,7 +189,7 @@ describe("todo list html fixture tests", function() {
             todoElements.text.focus();
             //NOTE: SENDKEYS DELETES out the current value so is flawed!
             $(document.activeElement).sendkeys(focusText);
-            expect(todoElements.text.val()).toEqual(focusText);
+            expect(todoHelper.getAllTodoElementsByText(focusText).text.val()).toEqual(focusText);
         }
     );
 
