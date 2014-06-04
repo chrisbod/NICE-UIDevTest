@@ -89,9 +89,18 @@ describe("todo list html fixture tests", function() {
     });
     it("a (new) todo description element should be present when input is typed and enter is hit", function() {
         var input = $(".todo-input");
-        todoHelper.createNewTodo(text);
-        todoTextElement = todoHelper.getTodoTextElementByText(text);
-        expect(todoTextElement).toBeTruthy();
+        input.sendkeys("my first todo");
+        todoHelper.createNewTodo(todoHelper.getElementTextOrValue(input[0]));
+        todoTextElement = todoHelper.getTodoTextElementByText("my first todo");
+        expect($(todoTextElement)).toBeVisible();
+        expect($(todoTextElement).closest(".todo").filter(".incomplete").length).toEqual(1);
+    });
+    it("a (new) todo description element should contain trimmed values", function() {
+        var input = $(".todo-input");
+        var enteredText = "  my first todo  ";
+        todoHelper.createNewTodo(enteredText);
+        todoTextElement = todoHelper.getTodoTextElementByText(enteredText.trim());
+        expect($(todoTextElement)).toBeVisible();
         expect($(todoTextElement).closest(".todo").filter(".incomplete").length).toEqual(1);
     });
     it("a (new) todo should be marked as incomplete", function() {
@@ -171,15 +180,14 @@ describe("todo list html fixture tests", function() {
         function() {
             if (!STATIC) { //static does no trimming
                 var text = "focus test",
-                    focusText = " focus edited ",
-                    focusTrimmed = "focus edited"
+                    focusText = " focus edited ";
                 todoHelper.createNewTodo(text);
                 var todoElements = todoHelper.getAllTodoElementsByText(text);
                 todoElements.text.focus();
                 //NOTE: SENDKEYS DELETES out the current value so is flawed!
                 $(document.activeElement).sendkeys(focusText);
                 document.body.focus()
-                expect(todoElements.text.val()).toEqual(focusTrimmed);
+                expect(todoElements.text.val()).toEqual(focusText.trim());
             }
         }
     );
