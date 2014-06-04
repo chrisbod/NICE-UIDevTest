@@ -120,6 +120,7 @@ including ensuring that when the hover goes out but the action has been given ke
 .todo-list .todo.incomplete :focus ~ .todo-action,
 .todo-list .todo.incomplete .todo-action:focus,
 .todo-list .todo.incomplete:hover .todo-action,
+.todo-list .todo.incomplete.hover .todo-action,/*allows us to force the hover state programatically*/
 .lt-ie9 .todo-list .todo-action.iefocus,
 .lt-ie9 .todo-list .todo.incomplete .iefocus ~ .todo-action,
 .lt-ie9 .todo-list .todo.iefocus .todo-action {

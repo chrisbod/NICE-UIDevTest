@@ -4,12 +4,22 @@ $.fn.forEach = function() { //prefer the ECMA forEach to the jquery each
 
 
 var todoHelper = {
+    getElementTextOrValue: function(element) {
+        return element.value || element.textContent || element.innerText || '';
+    },
+    setElementTextOrValue: function(element, text) {
+        if ("value" in element) {
+            element.value = text;
+        } else {
+            element.innerText = text;
+        }
+    },
     getTodoTextElementByText: function(todoText) {
         var todos = $(".todo-text"),
             targetTodo = null;
         todos.forEach(function(element) {
             if (!targetTodo) {
-                if (element.value == todoText || element.innerText == todoText || element.textContent == todoText) {
+                if (todoHelper.getElementTextOrValue(element) == todoText) {
                     targetTodo = element;
                 }
             }
@@ -20,9 +30,13 @@ var todoHelper = {
     createNewTodo: function(text) {
         eventHelper.typeTextAndHitEnter(text, $(".todo-input")[0]);
     },
-    getAllTodoElementsByText: function(todoText) { //returns jQuery collections
-        var todoText = this.getTodoTextElementByText(todoText),
+    getAllTodoElementsByText: function(text) { //returns jQuery collections
+        var todoText = this.getTodoTextElementByText(text),
             todo = $(todoText).closest(".todo");
+        if (todo.length == 0) {
+            //check if we've not found it
+            throw new Error("todo element [" + text + "] not found");
+        }
         return {
             text: $(todoText),
             todo: todo,
@@ -35,5 +49,11 @@ var todoHelper = {
         expect(elementToCheckVisibility).toBeVisible();
         elementToFocus.blur(); //sneaky checking that it disappears;
         expect(elementToCheckVisibility).not.toBeVisible();
+    },
+    checkHoverMakesVisible: function(elementToHoverOver, elementToCheckVisibility) {
+        //this test is for programmatical mouseover testing
+        //and assumes the 'root' todo gains a 'hover' class when moused over
+        //simulating hover state is not possible
+
     }
 }
