@@ -65,7 +65,7 @@
 			        <ul class="todos" data-bind="foreach: todos,visible: todos().length != 0">
 			        	<li class="todo" data-bind="css: state">
 				            <input class="todo-text" data-bind="value: text"/>
-				            <input class="todo-checkbox"/>
+				            <input class="todo-checkbox" data-bind="event:{click:$parent.completeTodo}"/>
 				            <input class="todo-action" data-bind="event:{click: $parent.removeTodo}"/>
 			          </li>
 			        </ul>

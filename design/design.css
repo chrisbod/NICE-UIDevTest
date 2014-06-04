@@ -154,10 +154,10 @@ including ensuring that when the hover goes out but the action has been given ke
 .lt-ie9 .todo-list .todo {
 	background-position: 10px 9px;
 }
-.todo-list .complete .todo-text {
+.todo-list .completed .todo-text {
 	color: rgb(59,95,67);
 }
-.todo-list .complete {
+.todo-list .completed {
 	background-image: url(images/tick.png);
 }
 .todo-list .removed {
