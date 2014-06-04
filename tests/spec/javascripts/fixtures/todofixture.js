@@ -54,92 +54,10 @@ User edits second of new tasks and
 */
 //attempt at helper function
 
-function fireChangeEvent(element) {
-    if (document.createEvent) {
-        var evt = document.createEvent("HTMLEvents");
-        evt.initEvent("change", false, true);
-        element.dispatchEvent(evt);
-    } else {
-        element.fireEvent("onchange");
-    }
-}
-
-function fireSubmitEvent(element) {
-    var cancelled = false;
-    if (document.createEvent) {
-        var evt = document.createEvent("HTMLEvents");
-        evt.initEvent("submit", false, true);
-        element.dispatchEvent(evt);
-        if (evt.defaultPrevented) cancelled = true;
-    } else {
-        cancelled = element.fireEvent("onsubmit");
-    }
-    return cancelled;
-}
-
-function fireClickEvent(element) {
-    var cancelled = false;
-    if (document.createEvent) {
-        var evt = document.createEvent("MouseEvents");
-        evt.initMouseEvent("click", false, true);
-        element.dispatchEvent(evt);
-        if (evt.defaultPrevented) cancelled = true;
-    } else {
-        cancelled = element.fireEvent("onclick");
-    }
-    return cancelled;
-}
 
 
 
-function hittingEnterOnElementWouldSubmitForm(element) {
-    if (element.form) {
-        if (element.type == "submit") {
-            return true;
-        }
-        if (element.type == "text") { //primitive as it could be an html5 element
-            if (element.form.elements[0] == element) { //even more primitive doesn't account for hidden fields etc
-                return true
-            }
-        }
-    }
-    return false;
 
-}
-
-function sendTextToElementAndHitEnter(text, element) {
-    $(element).sendkeys(text);
-    if (typeof element.onchange !== "undefined") { //of course the value may not have actually changed
-        fireChangeEvent(element);
-    }
-    if (hittingEnterOnElementWouldSubmitForm(element)) { //ASSUMPTION if it is indeed an input in a form then submit event would be fired and submit actioned if not cancelled
-        var cancelled = fireSubmitEvent(element);
-        if (!cancelled) {
-            input[0].form.submit(); //this would send jasmine crazy 
-        }
-    }
-}
-$.fn.forEach = function() {
-    [].forEach.apply(this, arguments)
-}
-
-function getTodoTextElementByText(todoText) {
-    var todos = $(".todo-text"),
-        targetTodo = null;
-    todos.forEach(function(element) {
-        if (!targetTodo) {
-            if (element.value == todoText || element.innerText == todoText || element.textContent == todoText) {
-                targetTodo = element;
-            }
-        }
-
-    });
-    return targetTodo;
-}
-
-function createNewTodo(text) {
-    sendTextToElementAndHitEnter(text, $(".todo-input")[0]);
-}
 describe("todo list html fixture tests", function() {
 
     var text = "my first todo",
@@ -163,88 +81,70 @@ describe("todo list html fixture tests", function() {
         expect($(".todo-input")).toBeVisible();
     });
     it("the input element should accept user input (programmatically simulated)", function() {
-        //TODO create proper helper method
         var input = $(".todo-input"),
             text = "my first todo";
-        createNewTodo(text);
+        todoHelper.createNewTodo(text);
         var output = input.val() || input.text(); //we don't know if its an input or an element
         expect(output).toEqual(text);
     });
     it("a (new) todo description element should be present when input is typed and enter is hit", function() {
         var input = $(".todo-input");
-        createNewTodo(text);
-        todoTextElement = getTodoTextElementByText(text);
+        todoHelper.createNewTodo(text);
+        todoTextElement = todoHelper.getTodoTextElementByText(text);
         expect(todoTextElement).toBeTruthy();
         expect($(todoTextElement).closest(".todo").filter(".incomplete").length).toEqual(1);
     });
     it("a (new) todo should be marked as incomplete", function() {
-        createNewTodo(text);
-        todoTextElement = getTodoTextElementByText(text);
+        todoHelper.createNewTodo(text);
+        todoTextElement = todoHelper.getTodoTextElementByText(text);
         expect($(todoTextElement).closest(".todo").filter(".incomplete").length).toEqual(1);
     });
     it("a (new) todo description element should be trimmed if whitespace is added",
         function() {
             var text = " i have whitespace  ",
                 trimmedText = "i have whitespace";
-            createNewTodo(text);
-            var targetTodoText = STATIC ? $(".STATIC-TRIM-TEST .todo-text") : $(getTodoTextElementByText(trimmedText));
+            todoHelper.createNewTodo(text);
+            var targetTodoText = STATIC ? $(".STATIC-TRIM-TEST .todo-text") : $(todoHelper.getTodoTextElementByText(trimmedText));
             expect(targetTodoText).toBeVisible()
         }
     );
     it("a (new) todo should have a visible 'checkbox'", function() {
-        createNewTodo(text);
-        var todoText = getTodoTextElementByText(text),
-            todoElement = $(todoText).closest(".todo"),
-            todoCheckbox = todoElement.find(".todo-checkbox");
+        todoHelper.createNewTodo(text);
+        var todoCheckbox = todoHelper.getAllTodoElementsByText(text).action;
         expect(todoCheckbox).toBeVisible();
     });
 
     it("a (new) todo should not have a visible action(remove) button", function() {
-        createNewTodo(text);
-        var todoText = getTodoTextElementByText(text),
-            todoElement = $(todoText).closest(".todo"),
-            todoCheckbox = todoElement.find(".todo-action");
-        expect(todoCheckbox).not.toBeVisible();
-    })
+        todoHelper.createNewTodo(text);
+        var todoAction = todoHelper.getAllTodoElementsByText(text).action;
+        expect(todoAction).not.toBeVisible();
+    });
     it("an incomplete todo's remove button should hide/show when focussed/blurred or (ideally) hovered - see comments)",
         /*without an automated browser we cannot simulate a hovering mouse (and touch devices don't do hover!)
     		so we are going to check that our remove button is visible when things have focus */
         function() {
-            createNewTodo(text)
-            var todoText = getTodoTextElementByText(text),
-                todoElement = $(todoText).closest(".todo"),
-                todoCheckbox = todoElement.find(".todo-checkbox"),
-                todoAction = todoElement.find(".todo-action");
-
-            todoElement.focus();
-            expect(todoAction).toBeVisible();
-            todoElement.blur(); //sneaky checking that it disappears;
-            expect(todoAction).not.toBeVisible();
-
-            todoText.focus();
-            expect(todoAction).toBeVisible();
-            todoText.blur();
-            expect(todoAction).not.toBeVisible();
-
-            todoCheckbox.focus();
-            expect(todoAction).toBeVisible();
-            todoCheckbox.blur();
-            expect(todoAction).not.toBeVisible();
+            todoHelper.createNewTodo(text)
+            var todoElements = todoHelper.getAllTodoElementsByText(text);
+            todoHelper.checkFocusMakesVisible(todoElements.todo, todoElements.action);
+            todoHelper.checkFocusMakesVisible(todoElements.text, todoElements.action);
+            todoHelper.checkFocusMakesVisible(todoElements.checkbox, todoElements.action);;
         }
     );
 
     it("when an incomplete todo's checkbox is clicked it should be marked as completed",
         function() {
-            var text = "todo - mark me completed"
-            createNewTodo(text);
-            var todoText = getTodoTextElementByText(text),
-                todoElement = $(todoText).closest(".todo"),
-                todoCheckbox = todoElement.find(".todo-checkbox");
-            todoElement.focus();
-            expect(todoCheckbox).toBeVisible();
-            fireClickEvent(todoCheckbox[0]);
-            var completedToDoText = STATIC ? $(".STATIC-COMPLETE-TEST .todo-text") : $(getTodoTextElementByText(text));
-            var completedToDoContainer = completedToDoText.closest(".todo").filter(".complete")
+            var text = "todo - mark me completed";
+            todoHelper.createNewTodo(text);
+            var todoElements = todoHelper.getAllTodoElementsByText(text),
+                completedToDoText,
+                completedToDoContainer;
+            todoElements.todo.focus();
+            expect(todoElements.checkbox).toBeVisible();
+            eventHelper.fireClick(todoElements.checkbox[0]);
+
+            completedToDoText = STATIC ? $(".STATIC-COMPLETE-TEST .todo-text") : $(todoHelper.getTodoTextElementByText(text));
+            completedToDoContainer = completedToDoText.closest(".todo").filter(".complete")
+
             expect(completedToDoContainer.length).toEqual(1)
         }
 
