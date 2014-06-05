@@ -74,7 +74,12 @@ Having (in the main) written all the tests against static code it was time to bu
 
 
 <a name="interesting_bits"></a>
-####Functional html example : [/src/knockout.htm] (https://github.com/chrisbod/NICE-UIDevTest/blob/master/src/knockout.htm)
+####Important files
+The first release is available as a distributable/zip https://github.com/chrisbod/NICE-UIDevTest/releases - please read the release notes as in my opinion it is a FAIL of the requirements but worthy of inspection
+
+The functional html example is in /src/knockout.htm [source here] (https://github.com/chrisbod/NICE-UIDevTest/blob/master/src/knockout.htm) 
+
+The tests are all in the test directory [/tests] (https://github.com/chrisbod/NICE-UIDevTest/tree/master/tests) - to run them in chrome you will need to change your security settings so that local file httprequests work
 
 ####Results
 At this time the application seems to be fully working but behavioural tests are failing due to a flaw in how my tests simulate user interactions.I fixed this last night but...(see below)
