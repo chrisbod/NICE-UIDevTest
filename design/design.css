@@ -26,6 +26,9 @@ $removed-color: rgb(136,136,136);
 	font-size: 16px;
 	background-color: transparent;
 }
+.todo-list input:focus {
+	outline: 1px solid rgb(233,233,233);
+}
 .todo-list fieldset {/*reset fieldsets to match other block elements*/
 	border-width: 0;
 	margin: 0;
@@ -48,7 +51,8 @@ $removed-color: rgb(136,136,136);
 	padding-top: 10px;
 
 }
-.todo-list .todo-input {
+.todo-list .todo-input,
+.todo-list .todo-text {
 	margin: 1px;
 	border-top: 2px solid rgb(233,233,233);
 	border-bottom: 2px solid rgb(233,233,233);
@@ -76,7 +80,7 @@ $removed-color: rgb(136,136,136);
 .todo-list .todo {
 	height: 26px;
 	position: relative;
-	padding: 11px 53px;
+	padding: 6px 53px;
 }
 
 .todo-list .descriptive {
@@ -132,16 +136,27 @@ including ensuring that when the hover goes out but the action has been given ke
 .lt-ie9 .todo-list .todo.removed .todo-action.iefocus  {
 	display:none;
 }
+.todo-list .todo-text,
+.todo-list .todo-text:read-only:focus,
+.todo-list .todo-text[readonly].iefocus
+ {
+	border-color: transparent;
+	outline-width: 0;
+}
+.todo-list .todo.incomplete .todo-text:focus,
+.lt-ie9 .todo-list .todo.incomplete .todo-text.iefocus {
+	border-top-color: rgb(233,233,233);
+	border-bottom-color: rgb(233,233,233);
+	border-left-color: rgb(245,245,245);
+	border-right-color: rgb(245,245,245);
+}
 
 .todo-list .todo-checkbox {
 	left: 10px;
 	top: 10px;
 }
 
-.todo-list .todo-text {
-	border-width: 0;
-	width: 312px;	
-}
+
 .todo-list .removed .todo-text {
 	text-decoration: line-through;
 	color: rgb(136,136,136);
