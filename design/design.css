@@ -78,9 +78,9 @@ $removed-color: rgb(136,136,136);
 	list-style: none;
 }
 .todo-list .todo {
-	height: 26px;
+	height: 36px;
 	position: relative;
-	padding: 6px 53px;
+	padding: 6px 44px;
 }
 
 .todo-list .descriptive {
