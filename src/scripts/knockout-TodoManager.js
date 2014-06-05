@@ -52,7 +52,7 @@ TodoManager.prototype.completeTodo = function(todo) {
 TodoManager.prototype.todoIsComplete = function(todo) {
     return todo.state() == "completed";
 }
-TodoManager.prototype.duplicateCheck = function(manager, jQueryEvent) {
+TodoManager.prototype.duplicateCheck = function(todo, jQueryEvent) {
     if (jQueryEvent.keyCode == 13) { //enter
         if (this.lastCreatedTodoText == jQueryEvent.target.value) {
             //repeat
@@ -60,4 +60,9 @@ TodoManager.prototype.duplicateCheck = function(manager, jQueryEvent) {
         }
     }
     return true;
+}
+TodoManager.prototype.escapeCheck = function(todo, jQueryEvent) {
+    if (jQueryEvent.keyCode == 27) { //escape
+        todo.revertText();
+    }
 }
