@@ -11,6 +11,7 @@ function TodoModel(data) {
         }
     });
     this.lastValue = this.text();
+    this.text.subscribe(this.validateText.bind(this));
     this.state = ko.observable(data.state || this.state()).extend({
         allowedValues: this.state_allowedValues
     });
@@ -37,7 +38,10 @@ TodoModel.prototype.editing = function() {
     return false;
 }
 TodoModel.prototype.validateText = function() {
-    alert(this.target.text())
+    if (this.text() == '') {
+        this.revertText();
+        this.state("removed");
+    }
 }
 //just using a property but could be an observable if we liked
 TodoModel.prototype.lastValue = '';
