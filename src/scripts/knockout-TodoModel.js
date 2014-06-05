@@ -3,14 +3,14 @@ function TodoModel(data) {
         data = {};
     }
     this._id = "todo" + TodoModel.count++;
-    this.text = ko.observable().extend({
+    this.text = ko.observable(data.text.trim() || this.text()).extend({
         trimWhitespace: {},
         storeLastValue: {
             propertyName: 'lastValue',
             targetObject: this
         }
     });
-    this.text(data.text.trim() || this.text());
+    this.lastValue = this.text();
     this.state = ko.observable(data.state || this.state()).extend({
         allowedValues: this.state_allowedValues
     });
@@ -42,7 +42,11 @@ TodoModel.prototype.validateText = function() {
 //just using a property but could be an observable if we liked
 TodoModel.prototype.lastValue = '';
 TodoModel.prototype.revertText = function() {
-    this.text(this.lastValue);
+    var value = this.lastValue;
+    if (value != this.text()) {
+        this.text(value);
+        this.lastValue = value;
+    }
 }
 
 
