@@ -54,6 +54,7 @@ var eventHelper = {
         $(element).sendkeys(text);
         if (typeof element.onchange !== "undefined") { //of course the value may not have actually changed
             this.fireChange(element);
+            //$(element).trigger("change")
         }
         if (this.hittingEnterOnElementWouldSubmitForm(element)) { //ASSUMPTION if it is indeed an input in a form then submit event would be fired and submit actioned if not cancelled
             var cancelled = this.fireSubmit(element);
