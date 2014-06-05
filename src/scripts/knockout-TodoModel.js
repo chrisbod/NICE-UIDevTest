@@ -99,3 +99,11 @@ if (!ko.bindingHandlers.readonly) { //future proofing I hope
     }
 
 }
+if (!ko.bindingHandlers.title) { //future proofing I hope
+    ko.bindingHandlers.title = {
+        update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+            element.title = valueAccessor()(viewModel);
+        }
+    }
+
+}

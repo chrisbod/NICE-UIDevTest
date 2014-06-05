@@ -68,3 +68,20 @@ TodoManager.prototype.escapeCheck = function(todo, jQueryEvent) {
         jQueryEvent.target.focus();
     }
 }
+TodoManager.prototype.buttonTitle = function(todo) {
+    switch (todo.state()) {
+        case 'incomplete':
+            {
+                return "Remove this todo";
+            }
+        case 'completed':
+            {
+                return "This todo has been completed";
+            }
+        case 'removed':
+            {
+                return "This todo has been removed";
+            }
+    }
+    return '';
+}
