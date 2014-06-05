@@ -129,7 +129,7 @@ including ensuring that when the hover goes out but the action has been given ke
 .lt-ie9 .todo-list .todo.incomplete .iefocus ~ .todo-action,
 .lt-ie9 .todo-list .todo.iefocus .todo-action {
 	display: block;
-	background-image: url(images/remove.png);
+	background-image: url(../images/remove.png);
 }
 /*force remove button to be hidden when the item is removed*/
 .todo-list .todo.removed .todo-action:focus,
@@ -162,7 +162,7 @@ including ensuring that when the hover goes out but the action has been given ke
 	color: rgb(136,136,136);
 }
 .todo-list .todo {
-	background-image: url(images/disc.png);
+	background-image: url(../images/disc.png);
 	background-repeat: no-repeat;
 	background-position: 10px 10px;
 }
@@ -173,8 +173,8 @@ including ensuring that when the hover goes out but the action has been given ke
 	color: rgb(59,95,67);
 }
 .todo-list .completed {
-	background-image: url(images/tick.png);
+	background-image: url(../images/tick.png);
 }
 .todo-list .removed {
-	background-image: url(images/cross.png);
+	background-image: url(../images/cross.png);
 }
