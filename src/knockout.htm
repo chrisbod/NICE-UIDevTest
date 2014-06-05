@@ -54,15 +54,15 @@
 		</script>
 	</head>
 	<body>
-		<form id="knockout-list" class="todo-list" data-bind="submit: function () {return false}" title="Todo list application">
+		<form id="knockout-list" class="todo-list" data-bind="submit: function () {return false}" title="Todo list application" role="application">
 			 <h3 class="todo-list-title">My todos</h3>
-			 <fieldset class="todos-add-new">
+			 <fieldset class="todos-add-new" role="create new todos">
 			  	<!--TODO placeholder shim-->
 			    <input class="todo-input" placeholder="New todo&hellip;" title="Enter your new todo here" data-bind="event:{change:newTodo,keypress:duplicateCheck}" />
 			</fieldset>
 
-			<fieldset class="todos-current-list">
-			        <ul class="todos" data-bind="foreach: todos,visible: todos().length != 0" title="A list of your current todos">
+			<fieldset class="todos-current-list" role="list">
+			        <ul class="todos" data-bind="foreach: todos,visible: todos().length != 0" title="A list of your current todos" aria-live="assertive">
 			        	<li class="todo" data-bind="css: state">
 			        		<input type="button" class="todo-checkbox" data-bind="event:{click:$parent.completeTodo}, title: $parent.buttonTitle"/>
 				            <input class="todo-text" data-bind="value: text, readonly:state() != 'incomplete', event:{keyup:$parent.escapeCheck}" title="Text/description of todo"/>        
