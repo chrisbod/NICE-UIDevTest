@@ -63,7 +63,8 @@ TodoManager.prototype.duplicateCheck = function(todo, jQueryEvent) {
 }
 TodoManager.prototype.escapeCheck = function(todo, jQueryEvent) {
     if (jQueryEvent.keyCode == 27) { //escape
-        jQueryEvent.target.blur(); //horrible hack really!
+        jQueryEvent.target.blur(); //horrible hack to trigger knockout update
         todo.revertText();
+        jQueryEvent.target.focus();
     }
 }
