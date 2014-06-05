@@ -7,6 +7,8 @@ A technical test undertaken for a NICE (NHS) developer role. Developed using Sub
 
 Test details located at https://github.com/nhsevidence/UIDevTest
 
+Skip the waffle and jump straight to the [interesting bits](#interesting_bits)
+
 Methodology
 ---
 The mini-app/single page application was developed using a (slightly haphazard) mix of progressive enhancement, BDD and TDD.
@@ -37,8 +39,8 @@ Some questions were instantly raised from reviewing the specification, among the
 
     More to the point, both requiring the user to double click and hover to reveal an action not otherwise presented is neither intuitive nor user friendly. It also (not coincidently) complicates development.
     
-1. The use of 'removal' is confusing in both the document and the design - clarification required as in some places it seems like a 'delete' action is desired - additionally the icon for 'removal' is a cross which usually means delete. There does not seem to be a way to properly delete a todo - a potentially annoying shortcoming of the application which by its absence (not coincidentally) arguably complicates development.
-2. Behaviour of the initial creation field was not fully specified - does it reset its content after submission (preventing user from creating multiple todos with the same description) or maintain it's content (my preferred behavior) - The design lacks an actual 'create todo' button (relying on the user to implicitly know to hit enter or equivalent
+2. The use of 'removal' is confusing in both the document and the design - clarification required as in some places it seems like a 'delete' action is desired - additionally the icon for 'removal' is a cross which usually means delete. There does not seem to be a way to properly delete a todo - a potentially annoying shortcoming of the application which by its absence (not coincidentally) arguably complicates development.
+3. Behaviour of the initial creation field was not fully specified - does it reset its content after submission (preventing user from creating multiple todos with the same description) or maintain it's content (my preferred behavior) - The design lacks an actual 'create todo' button (relying on the user to implicitly know to hit enter or equivalent
 
 #### Prototyping
 Creating an html-only implementation suggested some solutions to the problems outlined above.
@@ -63,10 +65,30 @@ Since I'd already started using jasmine I decided to try out jasmine html fixtur
 ####Build
 Having (in the main) written all the tests against static code it was time to build - since I'd spent a fair deal of time developing so far and I already had knockout style models built I decided to use knockout in the first instance (though I did not know for sure that knockout, my tests and jasmine-html-fixtures where going to sit well together). In fact at first it proved to be a difficult environment to work in since the fixtures are built and destroyed during tests etc so I jumped to creating an html page with the knockout app in it and everytime it looked like a new piece of functionality was working I just updated my fixture html to match and ran all the tests on it. (nice opportunity for extending jasmine-fixtures or writing some node/grunt utilities to do this automatically)
 
+#### Learnings/Retrospective
+1. Avoid accidentally telling git gui to clean up loose objects (git gc) when you still have some loose commits you want to keep!
+
+2. Always install node/grunt before doing any development so you can have automated unit tests running in the background while you develop (and jshint csslint etc)
+
+3. The only thing that took less time than creating the fully functioning app in knockout was writing the basic html markup and chopping out the images - even writing this readme has taken far longer than creating the app
+
+
+<a name="interesting_bits"></a>
+####Functional html example : [/src/knockout.htm] (https://github.com/chrisbod/NICE-UIDevTest/blob/master/src/knockout.htm)
+
 ####Results
 At this time the application seems to be fully working but behavioural tests are failing due to a flaw in how my tests simulate user interactions.I fixed this last night but...(see below)
 
-#### Learnings/Retrospective
-1. Avoid accidentally telling git gui to clean up loose objects (git gc) when you still have some loose commits you want to keep!
-2. Always install node/grunt before doing any development so you can have automated unit tests running in the background while you develop (and jshint csslint etc)
-3. The only thing that took less time than creating the fully functioning app in knockout was writing the basic html markup and chopping out the images - even writing this readme has taken far longer than creating the app
+####Accessibility/Design/Platform notes
+
+1. I have not used labels for controls but used title tags instead (this is fine with all bar one or two obscure screen readers)
+
+2. Due to the hiding and showing of the delete/remove buttons the reverse tab order is slightly different
+    - tab forward = todo, mark todo complete, todo text, remove todo
+    - tab backward does not focus on the remove todo but goes to the todo text
+    This inconsistency would be absent if the remove buttons where not hiding and showing but permanently visible (a better user experience anyway) 
+
+3. At present the text field is editabe on focus AND on click/tap - double click functionality is not provided since a double click would focus the field into edit mode anyway and on touch devices a focus event would occur before a dbl tap or tap hold too.
+
+4. My choice of title attributes is a little arbitrary and could do with cleaning up/simplification I suspect - a good chat with an accessibility expert or using a screen reader on it myself would improve things no doubt
+
